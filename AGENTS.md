@@ -27,3 +27,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## 4. Code Quality & Pre-Commit Rules
 - Format all code with Biome (`npx @biomejs/biome check --write <files>`) prior to saving or committing.
 - Respect Husky pre-commit hooks: ensure zero lint errors and proper formatting at all times.
+
+## 5. Git & OpenClaw Workflow Rules
+- **Branching Rule:** Never push directly to `main` for new features. Always create a feature branch (`git checkout -b feat/task-name`) based on Spec-Kit tasks in `.specify/specs/`.
+- **Pre-Push Check:** Always run `npx @biomejs/biome check --write .` before any `git commit`.
+- **OpenClaw Routing:** Use OpenClaw (`gemini-3-flash`) for sub-tasks, web research, and routine component generation.
+

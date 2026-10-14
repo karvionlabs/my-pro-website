@@ -1,0 +1,36 @@
+{
+	"$schema": "https://openclaw.ai/schema/config.json",
+	"project": {
+		"name": "my-pro-website",
+		"version": "0.1.0"
+	},
+	"gateway": {
+		"enabled": true,
+		"routing": {
+			"defaultModel": "google-antigravity/gemini-3-flash",
+			"codingModel": "google-antigravity/gemini-3-flash",
+			"fastModel": "google-antigravity/gemini-3-flash",
+			"reasoningModel": "google-antigravity/gemini-3-flash"
+		}
+	},
+	"tools": {
+		"webSearch": {
+			"enabled": true
+		},
+		"webFetch": {
+			"enabled": true
+		}
+	},
+	"guardrails": {
+		"ignoreFile": ".antigravityignore",
+		"restrictedPaths": [
+			"node_modules/**",
+			".next/**",
+			"dist/**",
+			".env*",
+			"*.log",
+			"package-lock.json",
+			".openclaw/**"
+		]
+	}
+}
