@@ -47,12 +47,20 @@ const translations: Record<Language, Record<string, string>> = {
 		metricOperations: "Continuous Operations",
 		metricOperationsDesc: "Autonomous task scheduling & monitoring",
 
-		// Services
+		// Services & Bento Grid
 		servicesBadge: "Core Capabilities",
 		servicesTitle: "Engineered to Automate, Accelerate & Scale",
 		servicesSubtitle:
 			"We bridge bleeding-edge AI models, robust Next.js web systems, and automated testing frameworks to turn complex technical challenges into streamlined business engines.",
 		consultCapability: "Consult on this capability",
+		bentoAiBadge: "Autonomous Execution",
+		bentoAiLiveConsole: "Agent Prompt & Tool Chaining Pipeline",
+		bentoWebBadge: "Sub-Second FCP",
+		bentoWebScore: "100/100 Core Web Vitals",
+		bentoSqaBadge: "CI/CD Pre-Merge Gate",
+		bentoSqaGuarantee: "Zero Regression Guarantee",
+		bentoGrowthBadge: "Automated Scaling",
+		bentoGrowthMetric: "400% Content & Conversion Velocity",
 
 		// Projects
 		projectsBadge: "Proven Results",
@@ -130,12 +138,20 @@ const translations: Record<Language, Record<string, string>> = {
 		metricOperations: "নিরবচ্ছিন্ন কার্যক্রম",
 		metricOperationsDesc: "২৪/৭ স্বয়ংক্রিয় মনিটরিং ও শিডিউলিং",
 
-		// Services
+		// Services & Bento Grid
 		servicesBadge: "মূল দক্ষতাসমূহ",
 		servicesTitle: "অটোমেশন, গতি ও স্কেল নিশ্চিত করার প্রযুক্তি",
 		servicesSubtitle:
 			"আমরা অত্যাধুনিক এআই মডেল, শক্তিশালী নেক্সট.জেএস ফ্রেমওয়ার্ক এবং অটোমেটেড টেস্টিং সমন্বয় করে যেকোনো জটিল কাজকে স্বয়ংক্রিয় ব্যবসায়িক ইঞ্জিনে রূপান্তরিত করি।",
 		consultCapability: "এই সার্ভিসের বিস্তারিত জানুন",
+		bentoAiBadge: "স্বয়ংক্রিয় এক্সিকিউশন",
+		bentoAiLiveConsole: "এজেন্ট প্রম্পট ও টুল পাইপলাইন",
+		bentoWebBadge: "সাব-সেকেন্ড এফসিপি",
+		bentoWebScore: "১০০/১০০ কোর ওয়েব ভাইটালস",
+		bentoSqaBadge: "সিআই/সিডি প্রি-মার্জ গেট",
+		bentoSqaGuarantee: "জিরো রিগ্রেশন নিশ্চয়তা",
+		bentoGrowthBadge: "স্বয়ংক্রিয় স্কেলিং",
+		bentoGrowthMetric: "৪০০% কনটেন্ট ও কনভার্শন গতি",
 
 		// Projects
 		projectsBadge: "বাস্তব ফলাফল",
