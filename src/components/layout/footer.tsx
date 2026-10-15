@@ -131,9 +131,7 @@ export function Footer() {
 
 				{/* Bottom Bar */}
 				<div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-					<p>
-						© {new Date().getFullYear()} {BRAND_DATA.name}. All rights reserved.
-					</p>
+					<p>© 2026 {BRAND_DATA.name}. All rights reserved.</p>
 					<div className="flex items-center gap-1">
 						<span>Engineered with Next.js 16, Shadcn UI & Biome by</span>
 						<span className="font-medium text-foreground">
