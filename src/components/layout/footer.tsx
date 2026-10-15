@@ -1,14 +1,20 @@
+"use client";
+
 import { ArrowUpRight, Mail, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { NAV_ITEMS } from "@/components/layout/header";
 import {
 	FacebookIcon,
 	GithubIcon,
 	LinkedinIcon,
 	YoutubeIcon,
 } from "@/components/layout/social-icons";
-import { BRAND_DATA, NAV_LINKS, SERVICES_DATA } from "@/data/portfolio-data";
+import { useLanguage } from "@/context/language-context";
+import { BRAND_DATA, SERVICES_DATA } from "@/data/portfolio-data";
 
 export function Footer() {
+	const { t } = useLanguage();
+
 	return (
 		<footer className="w-full border-t border-white/10 bg-background/90 text-muted-foreground">
 			<div className="container mx-auto max-w-6xl px-4 sm:px-6 py-12 lg:py-16">
@@ -86,13 +92,13 @@ export function Footer() {
 							Navigation
 						</h4>
 						<ul className="space-y-2.5 text-sm">
-							{NAV_LINKS.map((link) => (
-								<li key={link.name}>
+							{NAV_ITEMS.map((link) => (
+								<li key={link.key}>
 									<Link
 										href={link.href}
 										className="hover:text-foreground transition-colors"
 									>
-										{link.name}
+										{t(link.key)}
 									</Link>
 								</li>
 							))}
@@ -102,7 +108,7 @@ export function Footer() {
 					{/* Capabilities Column */}
 					<div className="space-y-4">
 						<h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
-							Core Services
+							{t("navServices")}
 						</h4>
 						<ul className="space-y-2.5 text-sm">
 							{SERVICES_DATA.map((service) => (

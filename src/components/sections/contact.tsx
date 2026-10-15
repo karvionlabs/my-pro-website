@@ -1,54 +1,116 @@
 "use client";
 
+import confetti from "canvas-confetti";
 import {
 	CheckCircle2,
 	Clock,
 	Mail,
 	MapPin,
+	MessageCircle,
 	Send,
 	Sparkles,
 } from "lucide-react";
+import { motion } from "motion/react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useLanguage } from "@/context/language-context";
 import { BRAND_DATA } from "@/data/portfolio-data";
 
 export function ContactSection() {
+	const { t } = useLanguage();
 	const [status, setStatus] = useState<
 		"idle" | "loading" | "success" | "error"
 	>("idle");
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
-		service: "AI Automation",
+		service: "AI Workflows & Autonomous Agents",
 		message: "",
 	});
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const servicesOptions = [
+		"AI Workflows & Autonomous Agents",
+		"High-Performance Full-Stack Web Apps",
+		"End-to-End Test Automation (SQA)",
+		"AI Digital Strategy & Growth Systems",
+	];
+
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!formData.name || !formData.email || !formData.message) return;
+		setErrorMessage(null);
+
+		if (
+			!formData.name.trim() ||
+			!formData.email.trim() ||
+			!formData.message.trim()
+		) {
+			setErrorMessage("Please fill in all required fields.");
+			return;
+		}
 
 		setStatus("loading");
-		// Client feedback simulation
-		setTimeout(() => {
+
+		try {
+			const res = await fetch("/api/contact", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+
+			const data = await res.json();
+
+			if (!res.ok) {
+				const errMsg =
+					data.errors?.message?.[0] ||
+					data.errors?.email?.[0] ||
+					data.message ||
+					"Failed to transmit inquiry.";
+				setErrorMessage(errMsg);
+				setStatus("error");
+				toast.error("Transmission Failed", {
+					description: errMsg,
+				});
+				return;
+			}
+
+			// Success actions: Confetti + Toast Notification + State transition
+			confetti({
+				particleCount: 90,
+				spread: 75,
+				origin: { y: 0.6 },
+				colors: ["#22d3ee", "#a855f7", "#34d399"],
+			});
+
+			toast.success(t("inquirySuccess"), {
+				description: t("inquirySuccessDesc"),
+			});
+
 			setStatus("success");
 			setFormData({
 				name: "",
 				email: "",
-				service: "AI Automation",
+				service: "AI Workflows & Autonomous Agents",
 				message: "",
 			});
-		}, 600);
+		} catch (err) {
+			console.error("[FORM_SUBMIT_ERROR]", err);
+			setErrorMessage(
+				"Network error occurred. Please try again or reach out on WhatsApp.",
+			);
+			setStatus("error");
+			toast.error("Network Error", {
+				description:
+					"Please check your connection or reach out directly on WhatsApp.",
+			});
+		}
 	};
-
-	const servicesOptions = [
-		"AI Automation",
-		"Next.js Web Development",
-		"Test Automation (SQA)",
-		"Full Enterprise Consulting",
-	];
 
 	return (
 		<section id="contact" className="py-20 md:py-28 relative">
@@ -56,27 +118,31 @@ export function ContactSection() {
 				{/* Section Header */}
 				<div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
 					<div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs font-medium uppercase tracking-wider mb-4">
-						Get in Touch
+						{t("contactBadge")}
 					</div>
 					<h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
-						Start Your Next Engineering Leap
+						{t("contactTitle")}
 					</h2>
 					<p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-						Have a project in mind or need autonomous AI workflows for your
-						team? Drop us a message and we'll evaluate feasibility within 24
-						hours.
+						{t("contactSubtitle")}
 					</p>
 				</div>
 
 				<div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
 					{/* Left: Contact Info & Value Prop */}
-					<div className="lg:col-span-2 space-y-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8">
+					<motion.div
+						initial={{ opacity: 0, x: -20 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.5 }}
+						className="lg:col-span-2 space-y-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8"
+					>
 						<div className="space-y-2">
 							<h3 className="font-heading text-xl font-bold text-foreground">
-								Direct Channels
+								{t("directChannels")}
 							</h3>
 							<p className="text-sm text-muted-foreground leading-relaxed">
-								Connect directly with Founder & Principal Engineer{" "}
+								{t("directDesc")}{" "}
 								<span className="text-foreground font-medium">
 									{BRAND_DATA.founder}
 								</span>
@@ -121,13 +187,26 @@ export function ContactSection() {
 								<div>
 									<div className="text-xs text-muted-foreground">Location</div>
 									<div className="text-sm font-medium text-foreground">
-										{BRAND_DATA.location} (Remote Globally)
+										{BRAND_DATA.location}
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div className="pt-4 border-t border-white/5">
+						{/* Direct WhatsApp Channel Button */}
+						<div className="pt-2">
+							<a
+								href="https://wa.me/8801840624022?text=Hello%20Abdullah%2C%20I%20am%20reaching%20out%20from%20Karvion%20Labs%20website%20to%20discuss%20a%20project."
+								target="_blank"
+								rel="noreferrer"
+								className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs sm:text-sm font-semibold transition-all hover:scale-[1.01] shadow-sm shadow-emerald-500/10"
+							>
+								<MessageCircle className="size-4" />
+								<span>{t("chatWhatsApp")}</span>
+							</a>
+						</div>
+
+						<div className="pt-2 border-t border-white/5">
 							<Badge
 								variant="outline"
 								className="w-full justify-center py-2 border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-xs"
@@ -136,40 +215,50 @@ export function ContactSection() {
 								NDAs & Type-Safe Architecture Guaranteed
 							</Badge>
 						</div>
-					</div>
+					</motion.div>
 
 					{/* Right: Interactive Form */}
-					<div className="lg:col-span-3 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8">
+					<motion.div
+						initial={{ opacity: 0, x: 20 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.5 }}
+						className="lg:col-span-3 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8"
+					>
 						{status === "success" ? (
 							<div className="py-12 flex flex-col items-center text-center space-y-4">
 								<div className="flex size-14 items-center justify-center rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400">
 									<CheckCircle2 className="size-8" />
 								</div>
 								<h3 className="font-heading text-2xl font-bold text-foreground">
-									Inquiry Transmitted Successfully
+									{t("inquirySuccess")}
 								</h3>
-								<p className="text-sm text-muted-foreground max-w-md">
-									Thank you! Your message has been received.{" "}
-									{BRAND_DATA.founder} will personally review your project scope
-									and respond within 24 hours.
+								<p className="text-sm text-muted-foreground max-w-md leading-relaxed">
+									{t("inquirySuccessDesc")}
 								</p>
 								<Button
 									variant="outline"
 									onClick={() => setStatus("idle")}
-									className="mt-4 border-white/15 hover:bg-white/10 text-foreground"
+									className="mt-4 border-white/15 hover:bg-white/10 text-foreground cursor-pointer"
 								>
-									Send Another Message
+									{t("sendAnother")}
 								</Button>
 							</div>
 						) : (
 							<form onSubmit={handleSubmit} className="space-y-6">
+								{errorMessage && (
+									<div className="p-3 rounded-lg border border-red-500/30 bg-red-500/10 text-red-300 text-xs">
+										{errorMessage}
+									</div>
+								)}
+
 								<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 									<div className="space-y-2">
 										<label
 											htmlFor="name"
 											className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
 										>
-											Your Name *
+											{t("yourName")}
 										</label>
 										<Input
 											id="name"
@@ -188,7 +277,7 @@ export function ContactSection() {
 											htmlFor="email"
 											className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
 										>
-											Email Address *
+											{t("emailAddress")}
 										</label>
 										<Input
 											id="email"
@@ -209,7 +298,7 @@ export function ContactSection() {
 										htmlFor="service-select"
 										className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
 									>
-										Service Focus
+										{t("serviceFocus")}
 									</label>
 									<div
 										id="service-select"
@@ -222,9 +311,9 @@ export function ContactSection() {
 												onClick={() =>
 													setFormData({ ...formData, service: opt })
 												}
-												className={`px-3 py-2 rounded-lg text-xs font-medium text-left border transition-all ${
+												className={`px-3 py-2 rounded-lg text-xs font-medium text-left border transition-all cursor-pointer ${
 													formData.service === opt
-														? "border-cyan-500 bg-cyan-500/15 text-cyan-300 font-semibold"
+														? "border-cyan-500 bg-cyan-500/15 text-cyan-300 font-semibold shadow-sm shadow-cyan-500/10"
 														: "border-white/10 bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground"
 												}`}
 											>
@@ -239,7 +328,7 @@ export function ContactSection() {
 										htmlFor="message"
 										className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
 									>
-										Project Details / Goals *
+										{t("projectDetails")}
 									</label>
 									<Textarea
 										id="message"
@@ -257,20 +346,20 @@ export function ContactSection() {
 								<Button
 									type="submit"
 									disabled={status === "loading"}
-									className="w-full bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-semibold h-11 shadow-lg shadow-cyan-500/20 border-0 flex items-center justify-center gap-2"
+									className="w-full bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-semibold h-11 shadow-lg shadow-cyan-500/20 border-0 flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-[1.01]"
 								>
 									{status === "loading" ? (
-										<span>Transmitting...</span>
+										<span>{t("submitting")}</span>
 									) : (
 										<>
-											<span>Submit Project Inquiry</span>
+											<span>{t("submitInquiry")}</span>
 											<Send className="size-4" />
 										</>
 									)}
 								</Button>
 							</form>
 						)}
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>
