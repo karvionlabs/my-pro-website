@@ -50,7 +50,7 @@ export function Footer() {
 							<Link
 								href={BRAND_DATA.socials.github}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-colors"
 								aria-label="GitHub Profile"
 							>
@@ -59,7 +59,7 @@ export function Footer() {
 							<Link
 								href={BRAND_DATA.socials.linkedin}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-colors"
 								aria-label="LinkedIn Profile"
 							>
@@ -68,7 +68,7 @@ export function Footer() {
 							<Link
 								href={BRAND_DATA.socials.facebook}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-colors"
 								aria-label="Facebook Page"
 							>
@@ -77,7 +77,7 @@ export function Footer() {
 							<Link
 								href={BRAND_DATA.socials.youtube}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-colors"
 								aria-label="YouTube Channel"
 							>
