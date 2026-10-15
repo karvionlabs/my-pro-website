@@ -1,17 +1,17 @@
 # Implementation Tasks: Core Agency & Portfolio Website (Karvion Labs)
 
 ## Phase 1: UI Primitives & Shadcn Installation
-- [ ] **Task 1.1:** Install required Shadcn UI components: `card`, `badge`, `sheet`, `dialog`, `input`, `textarea`, `tabs`.
-- [ ] **Task 1.2:** Verify all generated UI components compile cleanly with Next.js 16 and Biome.
+- [x] **Task 1.1:** Install required Shadcn UI components: `card`, `badge`, `sheet`, `dialog`, `input`, `textarea`, `tabs`.
+- [x] **Task 1.2:** Verify all generated UI components compile cleanly with Next.js 16 and Biome.
 
 ## Phase 2: Strongly Typed Content & Data Layer
-- [ ] **Task 2.1:** Create `src/data/portfolio-data.ts` with TypeScript interfaces for Services, Projects, Testimonials, Tech Stack, and Metrics.
-- [ ] **Task 2.2:** Populate `src/data/portfolio-data.ts` with authentic content for Karvion Labs (AI Automation, End-to-End Test Automation, Next.js Apps).
+- [x] **Task 2.1:** Create `src/data/portfolio-data.ts` with TypeScript interfaces for Services, Projects, Testimonials, Tech Stack, and Metrics.
+- [x] **Task 2.2:** Populate `src/data/portfolio-data.ts` with authentic content for Karvion Labs (AI Automation, End-to-End Test Automation, Next.js Apps).
 
 ## Phase 3: Layout & Navigation Components
-- [ ] **Task 3.1:** Create `src/components/layout/mobile-nav.tsx` implementing a slide-out mobile drawer with Shadcn `Sheet`.
-- [ ] **Task 3.2:** Create `src/components/layout/header.tsx` with sticky glassmorphism navbar, brand logo, navigation links, and CTA button.
-- [ ] **Task 3.3:** Create `src/components/layout/footer.tsx` with brand summary, quick links, social media handles, and copyright.
+- [x] **Task 3.1:** Create `src/components/layout/mobile-nav.tsx` implementing a slide-out mobile drawer with Shadcn `Sheet`.
+- [x] **Task 3.2:** Create `src/components/layout/header.tsx` with sticky glassmorphism navbar, brand logo, navigation links, and CTA button.
+- [x] **Task 3.3:** Create `src/components/layout/footer.tsx` with brand summary, quick links, social media handles, and copyright.
 
 ## Phase 4: Core Website Sections
 - [ ] **Task 4.1:** Build `src/components/sections/hero.tsx` with high-converting headline, status badge, dual CTAs, and animated stat metric counters.
