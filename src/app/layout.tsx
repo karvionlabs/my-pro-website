@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri, Plus_Jakarta_Sans } from "next/font/google";
+import { CommandMenu } from "@/components/layout/command-menu";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { SmoothScroll } from "@/components/layout/smooth-scroll";
+import { ThemeProvider } from "@/components/layout/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { LanguageProvider } from "@/context/language-context";
 import "./globals.css";
@@ -60,6 +63,51 @@ export const metadata: Metadata = {
 	},
 };
 
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Organization",
+			"@id": "https://karvionlabs.com/#organization",
+			name: "Karvion Labs",
+			url: "https://karvionlabs.com",
+			sameAs: [
+				"https://github.com/abdullahshahjada12-sudo",
+				"https://facebook.com/karvionlabs",
+				"https://youtube.com/@karvionlabs",
+				"https://linkedin.com/in/abdullahkarif",
+			],
+			founder: {
+				"@type": "Person",
+				"@id": "https://karvionlabs.com/#founder",
+				name: "Abdullah Karif Shahjada",
+				jobTitle: "Founder & Principal Automation Engineer",
+				email: "Abdullahshahjada12@gmail.com",
+				sameAs: [
+					"https://github.com/abdullahshahjada12-sudo",
+					"https://linkedin.com/in/abdullahkarif",
+				],
+			},
+			address: {
+				"@type": "PostalAddress",
+				addressLocality: "Chattogram & Dhaka",
+				addressCountry: "BD",
+			},
+			description:
+				"Karvion Labs engineers autonomous AI workflows, enterprise Next.js web applications, and bulletproof End-to-End test automation frameworks.",
+		},
+		{
+			"@type": "WebSite",
+			"@id": "https://karvionlabs.com/#website",
+			url: "https://karvionlabs.com",
+			name: "Karvion Labs",
+			publisher: {
+				"@id": "https://karvionlabs.com/#organization",
+			},
+		},
+	],
+};
+
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -71,18 +119,30 @@ export default function RootLayout({
 			className={`dark ${fontSans.variable} ${fontBangla.variable} scroll-smooth antialiased`}
 			suppressHydrationWarning
 		>
+			<head>
+				<script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+			</head>
 			<body className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-cyan-500/20 selection:text-cyan-300 relative">
-				<LanguageProvider>
-					{/* Architectural Grid & Ambient Vignette */}
-					<div
-						className="fixed inset-0 bg-grid-pattern pointer-events-none -z-10"
-						aria-hidden="true"
-					/>
-					<Header />
-					<main className="flex-1">{children}</main>
-					<Footer />
-					<Toaster position="bottom-right" richColors />
-				</LanguageProvider>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="dark"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<LanguageProvider>
+						<SmoothScroll />
+						<CommandMenu />
+						{/* Architectural Grid & Ambient Vignette */}
+						<div
+							className="fixed inset-0 bg-grid-pattern pointer-events-none -z-10"
+							aria-hidden="true"
+						/>
+						<Header />
+						<main className="flex-1">{children}</main>
+						<Footer />
+						<Toaster position="bottom-right" richColors />
+					</LanguageProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

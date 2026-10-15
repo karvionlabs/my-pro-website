@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowRight, Globe, Sparkles } from "lucide-react";
+import { ArrowRight, Globe, Search, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { openCommandPalette } from "@/components/layout/command-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -50,8 +51,22 @@ export function Header() {
 					))}
 				</nav>
 
-				{/* Right Actions: Language Switcher + Availability Badge + CTA Button */}
-				<div className="hidden sm:flex items-center gap-3">
+				{/* Right Actions: Command+K + Language Switcher + Availability Badge + CTA Button */}
+				<div className="hidden sm:flex items-center gap-2.5 lg:gap-3">
+					{/* Quick Search Palette Button */}
+					<button
+						type="button"
+						onClick={openCommandPalette}
+						className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-xs text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+						aria-label="Open command palette"
+					>
+						<Search className="size-3.5 text-cyan-400" />
+						<span className="hidden md:inline font-normal">Search</span>
+						<kbd className="pointer-events-none inline-flex h-4 select-none items-center gap-0.5 rounded border border-white/15 bg-white/10 px-1 font-mono text-[10px] font-medium text-muted-foreground">
+							Ctrl K
+						</kbd>
+					</button>
+
 					{/* Language Switcher */}
 					<Button
 						variant="ghost"
@@ -88,7 +103,17 @@ export function Header() {
 				</div>
 
 				{/* Mobile Controls */}
-				<div className="flex sm:hidden items-center gap-2">
+				<div className="flex sm:hidden items-center gap-1.5">
+					<Button
+						variant="ghost"
+						size="icon"
+						onClick={openCommandPalette}
+						className="size-7 text-muted-foreground hover:text-foreground cursor-pointer"
+						aria-label="Open search palette"
+					>
+						<Search className="size-3.5 text-cyan-400" />
+					</Button>
+
 					<Button
 						variant="ghost"
 						size="sm"
