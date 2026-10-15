@@ -20,9 +20,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Coding & Implementation Phase:** Route focused implementation and code-generation tasks to `gemini-3-flash` via OpenClaw / Antigravity for high-throughput, low-latency execution.
 - **Surgical Edits Only:** Prioritize minimal diffs and targeted block edits over full file replacements to avoid token waste and prevent regression.
 
-## 3. Documentation & Context7 MCP Integration
-- Use the **Context7 MCP** server to retrieve up-to-date documentation, API signatures, and version changes before writing unfamiliar library code or integrating new dependencies.
+## 3. Documentation & MCP Integration (Context7 & GitHub)
+- **Rule 1 (Context7 First):** Before writing or modifying code involving Next.js App Router, Shadcn UI, Tailwind CSS, or any external library, ALWAYS query the `context7` MCP server (`resolve-library-id` -> `get-library-docs`) to ensure 100% up-to-date syntax and zero hallucination.
 - Never guess or hallucinate API parameters or breaking changes in rapidly evolving libraries (such as Next.js, Tailwind v4, or Shadcn UI).
+- **Rule 2 (GitHub MCP):** Use the `github` MCP server or `gh` CLI to track feature branches, manage issues, and handle PRs cleanly.
 
 ## 4. Code Quality & Pre-Commit Rules
 - Format all code with Biome (`npx @biomejs/biome check --write <files>`) prior to saving or committing.

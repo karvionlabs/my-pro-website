@@ -21,6 +21,21 @@
 			"enabled": true
 		}
 	},
+	"mcp": {
+		"servers": {
+			"context7": {
+				"command": "npx",
+				"args": ["-y", "@upstash/context7-mcp"]
+			},
+			"github": {
+				"command": "sh",
+				"args": [
+					"-c",
+					"GITHUB_PERSONAL_ACCESS_TOKEN=$(gh auth token) npx -y @modelcontextprotocol/server-github"
+				]
+			}
+		}
+	},
 	"guardrails": {
 		"ignoreFile": ".antigravityignore",
 		"restrictedPaths": [

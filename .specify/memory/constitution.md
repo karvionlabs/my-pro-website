@@ -18,3 +18,8 @@
 ## 4. Spec-Driven Workflow (GitHub Spec-Kit)
 - **Spec First:** Major feature development, schema migrations, or architecture additions must begin with an approved specification in `.specify/specs/`.
 - **Traceability:** Implementations must directly map to criteria defined in the specification.
+
+## 5. Model Context Protocol (MCP) Guardrails
+- **Rule 1 (Context7 First):** Before writing or modifying code involving Next.js App Router, Shadcn UI, Tailwind CSS, or any external library, ALWAYS query the `context7` MCP server (`resolve-library-id` -> `get-library-docs`) to ensure 100% up-to-date syntax and zero hallucination.
+- **Rule 2 (GitHub MCP):** Use the `github` MCP server or `gh` CLI to track feature branches, manage issues, and handle PRs cleanly.
+
