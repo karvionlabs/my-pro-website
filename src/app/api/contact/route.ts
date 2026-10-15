@@ -1,6 +1,36 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+// Lightweight sliding window in-memory rate limiter (OWASP API4: Unrestricted Resource Consumption)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 60 seconds
+const MAX_REQUESTS = 5; // 5 inquiries per minute per IP
+
+function checkRateLimit(ip: string): boolean {
+	const now = Date.now();
+	const record = rateLimitMap.get(ip);
+
+	if (!record || now > record.resetTime) {
+		rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+		return true;
+	}
+
+	if (record.count >= MAX_REQUESTS) {
+		return false;
+	}
+
+	record.count += 1;
+	return true;
+}
+
+// Strict anti-XSS sanitizer stripping HTML control tags and executable vectors
+const sanitizeInput = (val: string): string =>
+	val
+		.replace(/<[^>]*>?/gm, "")
+		.replace(/javascript:/gi, "")
+		.replace(/data:/gi, "")
+		.trim();
+
 // Strict schema validation with length boundaries to prevent DoS & buffer exploitation (OWASP A05 & A06)
 const contactSchema = z.object({
 	name: z
@@ -27,6 +57,41 @@ const contactSchema = z.object({
 
 export async function POST(req: Request) {
 	try {
+		// Content-Length check to reject oversized payload DoS attacks before body consumption (OWASP API4)
+		const contentLength = req.headers.get("content-length");
+		if (contentLength && parseInt(contentLength, 10) > 16384) {
+			return NextResponse.json(
+				{
+					success: false,
+					message: "Payload Too Large: Submission exceeds 16KB limit.",
+				},
+				{
+					status: 413,
+					headers: { "X-Content-Type-Options": "nosniff" },
+				},
+			);
+		}
+
+		// Sliding window rate limit check (OWASP API4)
+		const forwarded = req.headers.get("x-forwarded-for");
+		const clientIp = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
+		if (!checkRateLimit(clientIp)) {
+			return NextResponse.json(
+				{
+					success: false,
+					message:
+						"Too many inquiries submitted. Please wait 60 seconds before retrying.",
+				},
+				{
+					status: 429,
+					headers: {
+						"Retry-After": "60",
+						"X-Content-Type-Options": "nosniff",
+					},
+				},
+			);
+		}
+
 		// Content-Type validation to prevent content sniffing & unauthorized media types (OWASP A02)
 		const contentType = req.headers.get("content-type") || "";
 		if (!contentType.includes("application/json")) {
@@ -76,11 +141,15 @@ export async function POST(req: Request) {
 		}
 
 		const { name, email, service, message } = result.data;
+		const cleanName = sanitizeInput(name);
+		const cleanEmail = email.toLowerCase().trim();
+		const cleanService = sanitizeInput(service);
+		const cleanMessage = sanitizeInput(message);
 
 		// Audit logging with masked identifier to prevent sensitive data leak in production logs (OWASP A09)
-		const sanitizedEmail = email.replace(/(?<=.{2}).(?=[^@]*?@)/g, "*");
+		const sanitizedEmail = cleanEmail.replace(/(?<=.{2}).(?=[^@]*?@)/g, "*");
 		console.log(
-			`[AUDIT_LEAD_INGEST] Inbound lead verified for ${name} (${sanitizedEmail}) -> Service: "${service}" (Length: ${message.length} chars)`,
+			`[AUDIT_LEAD_INGEST] Inbound lead verified for ${cleanName} (${sanitizedEmail}) -> Service: "${cleanService}" (Length: ${cleanMessage.length} chars)`,
 		);
 
 		return NextResponse.json(
@@ -89,9 +158,9 @@ export async function POST(req: Request) {
 				message:
 					"Inquiry received successfully. Abdullah Karif Shahjada will respond within 24 hours.",
 				data: {
-					name,
-					email,
-					service,
+					name: cleanName,
+					email: cleanEmail,
+					service: cleanService,
 					receivedAt: new Date().toISOString(),
 				},
 			},

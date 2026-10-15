@@ -15,6 +15,7 @@ const cspHeader = `
 `;
 
 const nextConfig: NextConfig = {
+	poweredByHeader: false,
 	cacheComponents: true,
 	partialPrefetching: true,
 	turbopack: {

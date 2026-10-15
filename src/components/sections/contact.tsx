@@ -198,7 +198,7 @@ export function ContactSection() {
 							<a
 								href="https://wa.me/8801840624022?text=Hello%20Abdullah%2C%20I%20am%20reaching%20out%20from%20Karvion%20Labs%20website%20to%20discuss%20a%20project."
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs sm:text-sm font-semibold transition-all hover:scale-[1.01] shadow-sm shadow-emerald-500/10"
 							>
 								<MessageCircle className="size-4" />

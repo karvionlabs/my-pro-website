@@ -125,7 +125,7 @@ export function ProjectDialog({
 							<Link
 								href={project.liveUrl}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className={buttonVariants({
 									size: "sm",
 									className:
@@ -140,7 +140,7 @@ export function ProjectDialog({
 							<Link
 								href={project.githubUrl}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className={buttonVariants({
 									variant: "outline",
 									size: "sm",
