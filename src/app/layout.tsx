@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Hind_Siliguri, Plus_Jakarta_Sans } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { Toaster } from "@/components/ui/sonner";
+import { LanguageProvider } from "@/context/language-context";
 import "./globals.css";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
+const fontSans = Plus_Jakarta_Sans({
+	variable: "--font-sans",
 	subsets: ["latin"],
+	display: "swap",
 });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+const fontBangla = Hind_Siliguri({
+	variable: "--font-bangla",
+	subsets: ["bengali"],
+	weight: ["400", "500", "600", "700"],
+	display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -63,12 +68,21 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`dark ${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}
+			className={`dark ${fontSans.variable} ${fontBangla.variable} scroll-smooth antialiased`}
+			suppressHydrationWarning
 		>
-			<body className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-cyan-500/20 selection:text-cyan-300">
-				<Header />
-				<main className="flex-1">{children}</main>
-				<Footer />
+			<body className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-cyan-500/20 selection:text-cyan-300 relative">
+				<LanguageProvider>
+					{/* Architectural Grid & Ambient Vignette */}
+					<div
+						className="fixed inset-0 bg-grid-pattern pointer-events-none -z-10"
+						aria-hidden="true"
+					/>
+					<Header />
+					<main className="flex-1">{children}</main>
+					<Footer />
+					<Toaster position="bottom-right" richColors />
+				</LanguageProvider>
 			</body>
 		</html>
 	);

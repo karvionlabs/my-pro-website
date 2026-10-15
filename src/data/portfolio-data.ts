@@ -58,7 +58,7 @@ export const BRAND_DATA = {
 	founderRole: "Founder & Principal Automation Engineer",
 	email: "Abdullahshahjada12@gmail.com",
 	status: "Available for Q4 Enterprise Projects",
-	location: "Dhaka, Bangladesh",
+	location: "Chattogram & Dhaka, Bangladesh (Remote Globally)",
 	socials: {
 		github: "https://github.com/abdullahshahjada12-sudo",
 		facebook: "https://facebook.com/karvionlabs",

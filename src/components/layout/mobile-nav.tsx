@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Menu, Sparkles } from "lucide-react";
+import { ArrowRight, Globe, Menu, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -11,10 +11,20 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { BRAND_DATA, NAV_LINKS } from "@/data/portfolio-data";
+import { useLanguage } from "@/context/language-context";
+import { BRAND_DATA } from "@/data/portfolio-data";
 
 export function MobileNav() {
 	const [open, setOpen] = useState(false);
+	const { language, toggleLanguage, t } = useLanguage();
+
+	const navItems = [
+		{ key: "navServices", href: "#services" },
+		{ key: "navProjects", href: "#projects" },
+		{ key: "navTechStack", href: "#tech-stack" },
+		{ key: "navTestimonials", href: "#testimonials" },
+		{ key: "navContact", href: "#contact" },
+	];
 
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
@@ -23,7 +33,7 @@ export function MobileNav() {
 					<Button
 						variant="ghost"
 						size="icon"
-						className="md:hidden text-foreground hover:bg-white/10"
+						className="md:hidden text-foreground hover:bg-white/10 cursor-pointer"
 						aria-label="Open navigation menu"
 					>
 						<Menu className="size-5" />
@@ -36,25 +46,36 @@ export function MobileNav() {
 			>
 				<div>
 					<SheetHeader className="p-0 text-left mb-6">
-						<SheetTitle className="flex items-center gap-2 text-lg font-bold">
-							<span className="flex size-8 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-								<Sparkles className="size-4" />
-							</span>
-							<span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
-								{BRAND_DATA.name}
-							</span>
+						<SheetTitle className="flex items-center justify-between text-lg font-bold">
+							<div className="flex items-center gap-2">
+								<span className="flex size-8 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+									<Sparkles className="size-4" />
+								</span>
+								<span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
+									{BRAND_DATA.name}
+								</span>
+							</div>
+							<Button
+								variant="outline"
+								size="sm"
+								onClick={toggleLanguage}
+								className="h-7 px-2 text-xs border-white/10 gap-1 cursor-pointer"
+							>
+								<Globe className="size-3 text-cyan-400" />
+								<span>{language === "en" ? "বাংলা" : "EN"}</span>
+							</Button>
 						</SheetTitle>
 					</SheetHeader>
 
 					<nav className="flex flex-col gap-2">
-						{NAV_LINKS.map((link) => (
+						{navItems.map((item) => (
 							<Link
-								key={link.name}
-								href={link.href}
+								key={item.key}
+								href={item.href}
 								onClick={() => setOpen(false)}
 								className="px-3 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
 							>
-								{link.name}
+								{t(item.key)}
 							</Link>
 						))}
 					</nav>
@@ -64,6 +85,9 @@ export function MobileNav() {
 					<div className="text-xs text-muted-foreground">
 						<p className="font-medium text-foreground">{BRAND_DATA.founder}</p>
 						<p>{BRAND_DATA.founderRole}</p>
+						<p className="text-[11px] text-muted-foreground/80 mt-0.5">
+							{BRAND_DATA.location}
+						</p>
 					</div>
 					<Link
 						href="#contact"
@@ -73,7 +97,7 @@ export function MobileNav() {
 								"w-full bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-medium shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2",
 						})}
 					>
-						<span>Start a Project</span>
+						<span>{t("startProject")}</span>
 						<ArrowRight className="size-4" />
 					</Link>
 				</div>

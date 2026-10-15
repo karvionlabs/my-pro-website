@@ -1,11 +1,24 @@
-import { ArrowRight, Sparkles } from "lucide-react";
+"use client";
+
+import { ArrowRight, Globe, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { BRAND_DATA, NAV_LINKS } from "@/data/portfolio-data";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { useLanguage } from "@/context/language-context";
+import { BRAND_DATA } from "@/data/portfolio-data";
+
+export const NAV_ITEMS = [
+	{ key: "navServices", href: "#services" },
+	{ key: "navProjects", href: "#projects" },
+	{ key: "navTechStack", href: "#tech-stack" },
+	{ key: "navTestimonials", href: "#testimonials" },
+	{ key: "navContact", href: "#contact" },
+];
 
 export function Header() {
+	const { language, toggleLanguage, t } = useLanguage();
+
 	return (
 		<header className="sticky top-0 z-40 w-full border-b border-white/10 bg-background/80 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
 			<div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -26,25 +39,39 @@ export function Header() {
 
 				{/* Desktop Navigation Links */}
 				<nav className="hidden md:flex items-center gap-1 lg:gap-2">
-					{NAV_LINKS.map((link) => (
+					{NAV_ITEMS.map((item) => (
 						<Link
-							key={link.name}
-							href={link.href}
+							key={item.key}
+							href={item.href}
 							className="px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
 						>
-							{link.name}
+							{t(item.key)}
 						</Link>
 					))}
 				</nav>
 
-				{/* Right Actions: Availability Badge + CTA Button */}
+				{/* Right Actions: Language Switcher + Availability Badge + CTA Button */}
 				<div className="hidden sm:flex items-center gap-3">
+					{/* Language Switcher */}
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={toggleLanguage}
+						className="h-8 px-2.5 rounded-lg border border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/10 text-xs font-medium text-foreground gap-1.5 transition-colors cursor-pointer"
+						aria-label="Toggle language"
+					>
+						<Globe className="size-3.5 text-cyan-400" />
+						<span className="font-semibold">
+							{language === "en" ? "বাংলা" : "EN"}
+						</span>
+					</Button>
+
 					<Badge
 						variant="outline"
 						className="hidden lg:inline-flex items-center gap-1.5 py-1 px-2.5 border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-normal"
 					>
 						<span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-						Available for Q4
+						{t("availableQ4")}
 					</Badge>
 
 					<Link
@@ -55,13 +82,23 @@ export function Header() {
 								"bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-medium shadow-md shadow-cyan-500/20 border-0 flex items-center gap-1.5",
 						})}
 					>
-						<span>Get a Quote</span>
+						<span>{t("getQuote")}</span>
 						<ArrowRight className="size-3.5" />
 					</Link>
 				</div>
 
-				{/* Mobile Drawer */}
+				{/* Mobile Controls */}
 				<div className="flex sm:hidden items-center gap-2">
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={toggleLanguage}
+						className="h-7 px-2 rounded-lg border border-white/10 text-xs font-semibold text-foreground cursor-pointer"
+						aria-label="Toggle language"
+					>
+						{language === "en" ? "বাং" : "EN"}
+					</Button>
+
 					<Link
 						href="#contact"
 						className={buttonVariants({
@@ -69,11 +106,20 @@ export function Header() {
 							className: "bg-cyan-500 text-white text-xs px-2.5 h-7",
 						})}
 					>
-						Hire Us
+						{t("hireUs")}
 					</Link>
 					<MobileNav />
 				</div>
-				<div className="hidden sm:flex md:hidden">
+				<div className="hidden sm:flex md:hidden items-center gap-2">
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={toggleLanguage}
+						className="h-8 px-2.5 rounded-lg border border-white/10 text-xs font-semibold text-foreground cursor-pointer"
+						aria-label="Toggle language"
+					>
+						{language === "en" ? "বাংলা" : "EN"}
+					</Button>
 					<MobileNav />
 				</div>
 			</div>

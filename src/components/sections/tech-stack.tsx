@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	Box,
 	CheckCircle,
@@ -11,7 +13,9 @@ import {
 	Sparkles,
 	Terminal,
 } from "lucide-react";
+import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/context/language-context";
 import { TECH_STACK_CATEGORIES } from "@/data/portfolio-data";
 
 const iconMap = {
@@ -29,6 +33,8 @@ const iconMap = {
 };
 
 export function TechStackSection() {
+	const { t } = useLanguage();
+
 	return (
 		<section
 			id="tech-stack"
@@ -38,24 +44,26 @@ export function TechStackSection() {
 				{/* Section Header */}
 				<div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
 					<div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-300 text-xs font-medium uppercase tracking-wider mb-4">
-						Engineering Stack
+						{t("techBadge")}
 					</div>
 					<h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
-						Production Runtimes & Tech Matrix
+						{t("techTitle")}
 					</h2>
 					<p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-						We deliberately choose open-source, high-throughput technologies
-						that eliminate technical debt, prevent regressions, and maximize
-						speed.
+						{t("techSubtitle")}
 					</p>
 				</div>
 
 				{/* Category Columns */}
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-					{TECH_STACK_CATEGORIES.map((category) => (
-						<div
+					{TECH_STACK_CATEGORIES.map((category, catIdx) => (
+						<motion.div
 							key={category.category}
-							className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-cyan-500/20 transition-colors"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.4, delay: catIdx * 0.1 }}
+							className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-cyan-500/30 transition-colors"
 						>
 							<div className="flex items-center justify-between pb-4 mb-4 border-b border-white/5">
 								<h3 className="font-heading text-base font-bold text-foreground">
@@ -99,7 +107,7 @@ export function TechStackSection() {
 									);
 								})}
 							</div>
-						</div>
+						</motion.div>
 					))}
 				</div>
 			</div>
