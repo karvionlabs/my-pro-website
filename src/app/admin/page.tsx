@@ -1,6 +1,8 @@
 import { desc } from "drizzle-orm";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { AdminDashboardView } from "@/components/admin/admin-dashboard-view";
+import { AdminLoginGate } from "@/components/admin/admin-login-gate";
 import {
 	db,
 	ensureDbTables,
@@ -19,7 +21,18 @@ export const metadata: Metadata = {
 	},
 };
 
+// Force dynamic execution on every request for real-time SQLite data
+export const dynamic = "force-dynamic";
+
 export default async function AdminPage() {
+	const cookieStore = await cookies();
+	const session = cookieStore.get("karvion_admin_session");
+
+	// Authentication Gate Check
+	if (session?.value !== "authenticated") {
+		return <AdminLoginGate />;
+	}
+
 	await ensureDbTables();
 
 	const initialLeads = await db.select().from(leads).orderBy(desc(leads.id));

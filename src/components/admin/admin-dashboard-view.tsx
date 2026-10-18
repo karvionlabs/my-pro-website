@@ -9,6 +9,7 @@ import {
 	Clock,
 	Database,
 	Layers,
+	LogOut,
 	Mail,
 	RefreshCw,
 	Search,
@@ -19,7 +20,7 @@ import {
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
-import { updateLeadStatus } from "@/app/admin/actions";
+import { logoutAdmin, updateLeadStatus } from "@/app/admin/actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -126,6 +127,22 @@ export function AdminDashboardView({
 					>
 						<RefreshCw className="size-3.5 mr-1 text-muted-foreground" />
 						Refresh
+					</Button>
+					<Button
+						variant="outline"
+						size="sm"
+						disabled={isPending}
+						onClick={() => {
+							startTransition(async () => {
+								await logoutAdmin();
+								toast.info("Session locked. Admin logged out.");
+								window.location.reload();
+							});
+						}}
+						className="h-8 border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-xs text-rose-300 cursor-pointer"
+					>
+						<LogOut className="size-3.5 mr-1" />
+						Lock
 					</Button>
 				</div>
 			</div>
