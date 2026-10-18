@@ -48,7 +48,7 @@ function InputGroupAddon({
 	...props
 }: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
 	return (
-		// biome-ignore lint/a11y/noStaticElementInteractions: Delegated click focus for child input
+		// biome-ignore lint/a11y/noStaticElementInteractions: focus delegator for parent input
 		<div
 			data-slot="input-group-addon"
 			data-align={align}
