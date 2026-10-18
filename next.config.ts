@@ -15,6 +15,7 @@ const cspHeader = `
 `;
 
 const nextConfig: NextConfig = {
+	output: "standalone",
 	poweredByHeader: false,
 	cacheComponents: true,
 	partialPrefetching: true,
