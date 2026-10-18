@@ -24,3 +24,7 @@
 - **Pre-Push Check:** Always run `npx @biomejs/biome check --write .` before any `git commit`.
 - **OpenClaw Routing:** Use OpenClaw (`gemini-3-flash`) for sub-tasks, web research, and routine component generation.
 
+## 6. Anti-"AI Vibe" & High-Craft Product Design Standards
+- **No Generic AI Gradients:** Never use cheap neon rainbow gradients, generic AI mesh blobs, or muddy pastel cards. Use Linear/Vercel-style subtle `1px` borders (`border-white/10`), high-contrast typography, monochrome surfaces with crisp single-color accents, and Bento Grid layouts.
+- **Real Data & Micro-Interactions:** Use `@number-flow/react` for metric numbers, `zustand` for complex client states, `nuqs` for URL states, and `drizzle-orm` for real data persistence.
+

@@ -6,3 +6,8 @@ dist/
 *.log
 package-lock.json
 .openclaw/
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+sqlite.db

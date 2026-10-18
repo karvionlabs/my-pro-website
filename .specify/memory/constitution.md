@@ -28,3 +28,7 @@
 - **Rule 1 (Context7 First):** Before writing or modifying code involving Next.js App Router, Shadcn UI, Tailwind CSS, or external libraries, query the `context7` MCP server to ensure up-to-date syntax.
 - **Rule 2 (GitHub MCP & CLI):** Use `gh` CLI or GitHub MCP to manage feature branches, create atomic pull requests, and merge with clean squash commits.
 - **Rule 3 (Playwright MCP):** Use Playwright MCP (`@playwright/mcp`) for automated end-to-end browser verification and visual regression testing.
+
+## 6. Anti-"AI Vibe" & High-Craft Product Design Standards
+- **No Generic AI Gradients:** Never use cheap neon rainbow gradients, generic AI mesh blobs, or muddy pastel cards. Use Linear/Vercel-style subtle `1px` borders (`border-white/10`), high-contrast typography, monochrome surfaces with crisp single-color accents, and Bento Grid layouts.
+- **Real Data & Micro-Interactions:** Use `@number-flow/react` for metric numbers, `zustand` for complex client states, `nuqs` for URL states, and `drizzle-orm` for real data persistence.
