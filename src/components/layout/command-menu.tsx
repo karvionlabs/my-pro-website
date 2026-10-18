@@ -108,6 +108,17 @@ export function CommandMenu() {
 					</CommandItem>
 
 					<CommandItem
+						onSelect={() => navigateTo("#workflow-builder")}
+						className="cursor-pointer"
+					>
+						<Cpu className="size-4 text-teal-400 mr-2" />
+						<span>
+							{language === "en" ? "AI Workflow Studio" : "অটোমেশন স্টুডিও"}
+						</span>
+						<CommandShortcut>#studio</CommandShortcut>
+					</CommandItem>
+
+					<CommandItem
 						onSelect={() => navigateTo("#projects")}
 						className="cursor-pointer"
 					>

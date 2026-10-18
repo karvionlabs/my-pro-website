@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { db, ensureDbTables, leads, systemEvents } from "@/db";
 
 // Lightweight sliding window in-memory rate limiter (OWASP API4: Unrestricted Resource Consumption)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -151,6 +152,26 @@ export async function POST(req: Request) {
 		console.log(
 			`[AUDIT_LEAD_INGEST] Inbound lead verified for ${cleanName} (${sanitizedEmail}) -> Service: "${cleanService}" (Length: ${cleanMessage.length} chars)`,
 		);
+
+		// Persist lead directly to Drizzle ORM SQLite database
+		try {
+			await ensureDbTables();
+			await db.insert(leads).values({
+				name: cleanName,
+				email: cleanEmail,
+				service: cleanService,
+				message: cleanMessage,
+			});
+			await db.insert(systemEvents).values({
+				eventName: "lead_inquiry_received",
+				metadata: JSON.stringify({
+					service: cleanService,
+					timestamp: new Date().toISOString(),
+				}),
+			});
+		} catch (dbErr) {
+			console.error("[DB_LEAD_INSERT_ERROR]", dbErr);
+		}
 
 		return NextResponse.json(
 			{
