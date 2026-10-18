@@ -10,6 +10,7 @@ import {
 	MessageCircle,
 	MessageSquareQuote,
 	Moon,
+	Shield,
 	Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -152,6 +153,23 @@ export function CommandMenu() {
 						<Mail className="size-4 text-amber-400 mr-2" />
 						<span>{t("navContact")}</span>
 						<CommandShortcut>#contact</CommandShortcut>
+					</CommandItem>
+
+					<CommandItem
+						onSelect={() =>
+							runCommand(() => {
+								window.location.href = "/admin";
+							})
+						}
+						className="cursor-pointer"
+					>
+						<Shield className="size-4 text-emerald-400 mr-2" />
+						<span>
+							{language === "en"
+								? "Executive Operations Hub (/admin)"
+								: "অপারেশনস ও লিড ড্যাশবোর্ড (/admin)"}
+						</span>
+						<CommandShortcut>/admin</CommandShortcut>
 					</CommandItem>
 				</CommandGroup>
 
