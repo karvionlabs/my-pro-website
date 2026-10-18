@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
@@ -34,31 +34,33 @@ export function HeroSection() {
 
 	return (
 		<section className="relative overflow-hidden pt-20 pb-16 md:pt-28 md:pb-24 border-b border-white/5">
-			{/* Ambient background glow & radial spotlight */}
-			<div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] md:size-[700px] bg-gradient-to-tr from-cyan-500/15 via-violet-500/15 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+			{/* High-end monochromatic radial spotlight */}
+			<div className="absolute top-0 left-1/2 -translate-x-1/2 size-[600px] md:size-[800px] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(120,119,198,0.12),rgba(255,255,255,0))] pointer-events-none -z-10" />
 
 			<div className="container mx-auto max-w-6xl px-4 sm:px-6 flex flex-col items-center text-center">
-				{/* Status Pill Badge with Motion */}
+				{/* Status Pill Badge with Minimalist Pulsing Indicator */}
 				<motion.div
 					initial={{ opacity: 0, y: -10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.4 }}
-					className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md text-cyan-300 text-xs sm:text-sm font-medium mb-8 shadow-sm shadow-cyan-500/10"
+					className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-neutral-300 text-xs font-mono mb-8 hover:border-white/20 transition-all"
 				>
-					<span className="flex size-2 rounded-full bg-cyan-400 animate-ping" />
-					<span className="flex size-2 rounded-full bg-cyan-400" />
+					<span className="relative flex size-2">
+						<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+						<span className="relative inline-flex rounded-full size-2 bg-emerald-400" />
+					</span>
 					<span>{t("heroStatus")}</span>
 				</motion.div>
 
-				{/* Main Headline */}
+				{/* High-End Contrast Headline */}
 				<motion.h1
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.1 }}
-					className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl leading-[1.1] text-foreground"
+					className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl leading-[1.08] text-foreground"
 				>
 					{t("heroTitle1")}{" "}
-					<span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-violet-400 bg-clip-text text-transparent">
+					<span className="bg-gradient-to-r from-neutral-100 via-neutral-200 to-neutral-400 bg-clip-text text-transparent">
 						{t("heroTitle2")}
 					</span>
 				</motion.h1>
@@ -68,33 +70,30 @@ export function HeroSection() {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.2 }}
-					className="mt-6 text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed"
+					className="mt-6 text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed font-normal"
 				>
 					{t("heroSubtitle")}
 				</motion.p>
 
-				{/* Key Value Highlights */}
+				{/* Clean Minimal Text Tags (No Emojis or Icons) */}
 				<motion.div
 					initial={{ opacity: 0, y: 15 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.3 }}
-					className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs sm:text-sm text-muted-foreground"
+					className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs font-mono text-muted-foreground"
 				>
-					<div className="flex items-center gap-1.5 text-foreground">
-						<CheckCircle2 className="size-4 text-cyan-400" />
-						<span>{t("heroHighlight1")}</span>
-					</div>
-					<div className="flex items-center gap-1.5 text-foreground">
-						<CheckCircle2 className="size-4 text-cyan-400" />
-						<span>{t("heroHighlight2")}</span>
-					</div>
-					<div className="flex items-center gap-1.5 text-foreground">
-						<CheckCircle2 className="size-4 text-cyan-400" />
-						<span>{t("heroHighlight3")}</span>
-					</div>
+					<span className="px-3 py-1 rounded-md border border-white/10 bg-white/[0.02] text-neutral-300">
+						{t("heroHighlight1")}
+					</span>
+					<span className="px-3 py-1 rounded-md border border-white/10 bg-white/[0.02] text-neutral-300">
+						{t("heroHighlight2")}
+					</span>
+					<span className="px-3 py-1 rounded-md border border-white/10 bg-white/[0.02] text-neutral-300">
+						{t("heroHighlight3")}
+					</span>
 				</motion.div>
 
-				{/* Dual Action Buttons */}
+				{/* Refined Dual Action Buttons */}
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
@@ -106,7 +105,7 @@ export function HeroSection() {
 						className={buttonVariants({
 							size: "lg",
 							className:
-								"w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-semibold shadow-lg shadow-cyan-500/25 border-0 px-8 h-12 text-base flex items-center justify-center gap-2 transition-all hover:scale-[1.02]",
+								"w-full sm:w-auto bg-foreground text-background hover:bg-neutral-200 font-semibold border-0 px-8 h-12 text-sm flex items-center justify-center gap-2 rounded-lg transition-all hover:scale-[1.01] cursor-pointer",
 						})}
 					>
 						<span>{t("scheduleCall")}</span>
@@ -119,32 +118,32 @@ export function HeroSection() {
 							variant: "outline",
 							size: "lg",
 							className:
-								"w-full sm:w-auto border-white/15 bg-white/5 hover:bg-white/10 text-foreground px-8 h-12 text-base flex items-center justify-center gap-2 transition-all hover:scale-[1.02]",
+								"w-full sm:w-auto border-white/15 bg-white/[0.03] hover:bg-white/[0.08] text-foreground px-8 h-12 text-sm flex items-center justify-center gap-2 rounded-lg transition-all hover:scale-[1.01] cursor-pointer",
 						})}
 					>
 						<span>{t("exploreCases")}</span>
 					</Link>
 				</motion.div>
 
-				{/* Live Metric Counters Grid with Staggered Entrance */}
+				{/* Crisp Bento Grid Metric Cards */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6, delay: 0.5 }}
-					className="mt-16 sm:mt-20 w-full grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 sm:p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl"
+					className="mt-16 sm:mt-20 w-full grid grid-cols-2 lg:grid-cols-4 gap-4"
 				>
 					{metrics.map((metric) => (
 						<div
 							key={metric.label}
-							className="group flex flex-col items-center justify-center p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:border-cyan-500/30 hover:bg-white/[0.04] transition-all duration-300"
+							className="group flex flex-col items-center justify-center p-6 rounded-2xl border border-white/10 bg-neutral-900/60 backdrop-blur-md hover:border-white/25 hover:bg-neutral-900/90 hover:-translate-y-1 transition-all duration-300"
 						>
-							<div className="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent group-hover:scale-105 transition-transform">
+							<div className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-foreground group-hover:text-cyan-300 transition-colors">
 								{metric.value}
 							</div>
-							<div className="mt-1 text-sm font-semibold text-foreground">
+							<div className="mt-2 text-sm font-semibold text-foreground tracking-tight">
 								{metric.label}
 							</div>
-							<div className="mt-0.5 text-xs text-muted-foreground text-center">
+							<div className="mt-1 text-xs text-muted-foreground text-center font-normal">
 								{metric.description}
 							</div>
 						</div>

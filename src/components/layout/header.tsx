@@ -94,7 +94,7 @@ export function Header() {
 						className={buttonVariants({
 							size: "sm",
 							className:
-								"bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-medium shadow-md shadow-cyan-500/20 border-0 flex items-center gap-1.5",
+								"bg-foreground text-background hover:bg-neutral-200 font-medium text-xs h-8 px-3 rounded-lg border-0 flex items-center gap-1.5 transition-colors cursor-pointer",
 						})}
 					>
 						<span>{t("getQuote")}</span>

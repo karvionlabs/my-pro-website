@@ -28,7 +28,7 @@ const translations: Record<Language, Record<string, string>> = {
 		exploreCases: "Explore Case Studies",
 
 		// Hero
-		heroStatus: "⚡ Open for Q4 AI Automation & SQA Projects",
+		heroStatus: "Open for Q4 AI Automation & SQA Projects",
 		heroTitle1: "Automating Complex Workflows.",
 		heroTitle2: "Building Resilient Software.",
 		heroSubtitle:
@@ -119,7 +119,7 @@ const translations: Record<Language, Record<string, string>> = {
 		exploreCases: "কেস স্টাডি দেখুন",
 
 		// Hero
-		heroStatus: "⚡ কিউ৪ এআই অটোমেশন ও এসকিউএ প্রজেক্টের জন্য উন্মুক্ত",
+		heroStatus: "কিউ৪ এআই অটোমেশন ও এসকিউএ প্রজেক্টের জন্য উন্মুক্ত",
 		heroTitle1: "জটিল ওয়ার্কফ্লোর আধুনিক অটোমেশন।",
 		heroTitle2: "নির্ভরযোগ্য ও নিরাপদ সফটওয়্যার।",
 		heroSubtitle:
