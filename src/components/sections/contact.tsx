@@ -1,6 +1,5 @@
 "use client";
 
-import confetti from "canvas-confetti";
 import {
 	CheckCircle2,
 	Clock,
@@ -8,7 +7,7 @@ import {
 	MapPin,
 	MessageCircle,
 	Send,
-	Sparkles,
+	ShieldCheck,
 } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -79,14 +78,6 @@ export function ContactSection() {
 				});
 				return;
 			}
-
-			// Success actions: Confetti + Toast Notification + State transition
-			confetti({
-				particleCount: 90,
-				spread: 75,
-				origin: { y: 0.6 },
-				colors: ["#22d3ee", "#a855f7", "#34d399"],
-			});
 
 			toast.success(t("inquirySuccess"), {
 				description: t("inquirySuccessDesc"),
@@ -209,9 +200,9 @@ export function ContactSection() {
 						<div className="pt-2 border-t border-white/5">
 							<Badge
 								variant="outline"
-								className="w-full justify-center py-2 border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-xs"
+								className="w-full justify-center py-2 border-white/10 bg-white/[0.02] text-neutral-300 text-xs font-mono font-normal"
 							>
-								<Sparkles className="size-3.5 mr-1.5" />
+								<ShieldCheck className="size-3.5 mr-1.5 text-neutral-400" />
 								NDAs & Type-Safe Architecture Guaranteed
 							</Badge>
 						</div>

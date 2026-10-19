@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Globe, Search, Sparkles } from "lucide-react";
+import { ArrowRight, Globe, Search, Terminal } from "lucide-react";
 import Link from "next/link";
 import { openCommandPalette } from "@/components/layout/command-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -25,15 +25,15 @@ export function Header() {
 			<div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
 				{/* Brand Logo */}
 				<Link href="/" className="flex items-center gap-2.5 group">
-					<div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 group-hover:border-cyan-400 transition-colors shadow-sm shadow-cyan-500/20">
-						<Sparkles className="size-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+					<div className="flex size-8 items-center justify-center rounded-lg border border-white/15 bg-white/[0.04] text-foreground group-hover:border-white/30 transition-colors">
+						<Terminal className="size-4 text-cyan-400" />
 					</div>
 					<div className="flex flex-col">
 						<span className="font-heading text-lg font-bold tracking-tight text-foreground group-hover:text-cyan-400 transition-colors">
 							{BRAND_DATA.name}
 						</span>
 						<span className="text-[10px] text-muted-foreground -mt-1 font-mono tracking-wide">
-							AI & SQA LABS
+							SYSTEMS & SQA
 						</span>
 					</div>
 				</Link>
@@ -83,9 +83,9 @@ export function Header() {
 
 					<Badge
 						variant="outline"
-						className="hidden lg:inline-flex items-center gap-1.5 py-1 px-2.5 border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-normal"
+						className="hidden lg:inline-flex items-center gap-1.5 py-1 px-2.5 border-white/10 bg-white/[0.02] text-neutral-300 text-xs font-mono font-normal"
 					>
-						<span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+						<span className="size-1.5 rounded-full bg-emerald-400" />
 						{t("availableQ4")}
 					</Badge>
 

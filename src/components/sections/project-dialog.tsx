@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowUpRight, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { GithubIcon } from "@/components/layout/social-icons";
 import { Badge } from "@/components/ui/badge";
@@ -41,10 +41,9 @@ export function ProjectDialog({
 						{project.featured && (
 							<Badge
 								variant="outline"
-								className="border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs flex items-center gap-1"
+								className="border-white/10 bg-white/[0.03] text-neutral-300 text-xs font-mono"
 							>
-								<Sparkles className="size-3" />
-								Featured Case Study
+								Case Study
 							</Badge>
 						)}
 					</div>

@@ -311,7 +311,7 @@ export const TECH_STACK_CATEGORIES: TechStackCategory[] = [
 				description:
 					"Ultra-fast low-latency multi-turn reasoning and agent turns",
 				proficiency: "Advanced",
-				iconName: "Sparkles",
+				iconName: "Cpu",
 			},
 			{
 				name: "Python Automation",

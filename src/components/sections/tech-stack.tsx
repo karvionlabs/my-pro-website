@@ -10,7 +10,6 @@ import {
 	Layers,
 	Palette,
 	Shield,
-	Sparkles,
 	Terminal,
 } from "lucide-react";
 import { motion } from "motion/react";
@@ -20,7 +19,6 @@ import { TECH_STACK_CATEGORIES } from "@/data/portfolio-data";
 
 const iconMap = {
 	Cpu,
-	Sparkles,
 	Terminal,
 	Globe,
 	Code,

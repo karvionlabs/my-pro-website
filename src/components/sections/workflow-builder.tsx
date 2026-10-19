@@ -1,7 +1,6 @@
 "use client";
 
 import NumberFlow from "@number-flow/react";
-import confetti from "canvas-confetti";
 import {
 	Activity,
 	ArrowRight,
@@ -14,7 +13,6 @@ import {
 	Save,
 	Send,
 	ShieldCheck,
-	Sparkles,
 	Terminal,
 	Video,
 	Zap,
@@ -310,11 +308,6 @@ export function WorkflowBuilderSection() {
 
 			const data = await res.json();
 			if (data.success) {
-				confetti({
-					particleCount: 50,
-					spread: 60,
-					origin: { y: 0.8 },
-				});
 				toast.success(
 					language === "en"
 						? "Blueprint saved to Drizzle SQLite DB!"
@@ -346,9 +339,9 @@ export function WorkflowBuilderSection() {
 			<div className="flex flex-col items-center text-center mb-16 space-y-4">
 				<Badge
 					variant="outline"
-					className="px-3.5 py-1 text-xs border-cyan-500/30 bg-cyan-500/10 text-cyan-400 font-mono tracking-wide"
+					className="px-3.5 py-1 text-xs border-white/10 bg-white/[0.02] text-neutral-300 font-mono tracking-wide"
 				>
-					<Sparkles className="size-3.5 mr-1.5 inline text-cyan-400" />
+					<Layers className="size-3.5 mr-1.5 inline text-cyan-400" />
 					{language === "en"
 						? "INTERACTIVE ARCHITECTURE STUDIO"
 						: "ইন্টারেক্টিভ আর্কিটেকচার স্টুডিও"}
@@ -650,7 +643,7 @@ export function WorkflowBuilderSection() {
 										<span>Live Pipeline Output Trace</span>
 									</div>
 									<div className="flex items-center gap-1.5 text-[10px]">
-										<span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+										<span className="size-1.5 rounded-full bg-emerald-400" />
 										<span>DAEMON IDLE</span>
 									</div>
 								</div>
