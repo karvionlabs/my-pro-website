@@ -6,9 +6,12 @@ import {
 	verifySessionToken,
 } from "@/lib/crypto";
 import { exportToCsv, parseCsvData } from "@/lib/csv-engine";
+import { sendPushToDevice } from "@/lib/firebase/admin";
 import { logger } from "@/lib/logger";
 import { sendEmail } from "@/lib/mailer";
+import { prisma } from "@/lib/prisma";
 import { createQueryClient } from "@/lib/query-client";
+import { createClient as createSupabaseClient } from "@/lib/supabase/client";
 import { useTelemetryStore } from "@/store/telemetry-store";
 
 describe("Infrastructure & DevOps Core Unit Tests", () => {
@@ -117,6 +120,46 @@ describe("Infrastructure & DevOps Core Unit Tests", () => {
 			expect(exportToCsv([])).toBe("");
 			expect(parseCsvData("")).toEqual([]);
 			expect(parseCsvData("   ")).toEqual([]);
+		});
+	});
+
+	describe("7. Supabase Client Engine", () => {
+		it("initializes browser client with default auth and storage interfaces", () => {
+			const supabase = createSupabaseClient();
+			expect(supabase).toBeDefined();
+			expect(typeof supabase.auth.signUp).toBe("function");
+			expect(typeof supabase.from).toBe("function");
+		});
+	});
+
+	describe("8. Firebase Cloud Messaging (Push Engine)", () => {
+		it("performs simulated dry-run notification dispatch when credentials are unset", async () => {
+			const result = await sendPushToDevice({
+				token: "mock-fcm-device-registration-token",
+				title: "System Update",
+				body: "Karvion automated workflow triggered",
+			});
+			expect(result).toBeDefined();
+			expect(result.messageId).toContain("mock-fcm-");
+		});
+
+		it("throws an error when device token is omitted", async () => {
+			await expect(
+				sendPushToDevice({
+					token: "",
+					title: "Test",
+					body: "Missing token",
+				}),
+			).rejects.toThrow("Target device push token is required.");
+		});
+	});
+
+	describe("9. Prisma PostgreSQL Relational Client", () => {
+		it("exports configured prisma instance with model delegates", () => {
+			expect(prisma).toBeDefined();
+			expect(typeof prisma.user.findMany).toBe("function");
+			expect(typeof prisma.lead.findMany).toBe("function");
+			expect(typeof prisma.callLog.findMany).toBe("function");
 		});
 	});
 });

@@ -1,0 +1,116 @@
+// Prisma Schema for Karvion Labs (PostgreSQL / Supabase / Neon.tech)
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  INSTRUCTOR
+  STUDENT
+  RECRUITER
+  USER
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CLOSED
+}
+
+enum SessionStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum CallDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum CallStatus {
+  RINGING
+  ANSWERED
+  BUSY
+  FAILED
+  COMPLETED
+}
+
+model User {
+  id           String            @id @default(uuid())
+  email        String            @unique
+  fullName     String?           @map("full_name")
+  role         Role              @default(USER)
+  avatarUrl    String?           @map("avatar_url")
+  createdAt    DateTime          @default(now()) @map("created_at")
+  updatedAt    DateTime          @updatedAt @map("updated_at")
+  courses      Course[]          @relation("InstructorCourses")
+  tutoringHost TutoringSession[] @relation("TutorSessions")
+  tutoringAtt  TutoringSession[] @relation("StudentSessions")
+
+  @@map("users")
+}
+
+model Lead {
+  id        String     @id @default(uuid())
+  name      String
+  email     String
+  service   String
+  budget    String     @default("Flexible / TBD")
+  message   String
+  status    LeadStatus @default(NEW)
+  createdAt DateTime   @default(now()) @map("created_at")
+
+  @@map("leads")
+}
+
+model Course {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  description     String?
+  instructorId    String   @map("instructor_id")
+  instructor      User     @relation("InstructorCourses", fields: [instructorId], references: [id], onDelete: Cascade)
+  status          String   @default("DRAFT")
+  durationMinutes Int      @default(0) @map("duration_minutes")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@map("courses")
+}
+
+model TutoringSession {
+  id          String        @id @default(uuid())
+  tutorId     String        @map("tutor_id")
+  tutor       User          @relation("TutorSessions", fields: [tutorId], references: [id])
+  studentId   String        @map("student_id")
+  student     User          @relation("StudentSessions", fields: [studentId], references: [id])
+  scheduledAt DateTime      @map("scheduled_at")
+  meetingUrl  String?       @map("meeting_url")
+  status      SessionStatus @default(SCHEDULED)
+  createdAt   DateTime      @default(now()) @map("created_at")
+
+  @@map("tutoring_sessions")
+}
+
+model CallLog {
+  id              String        @id @default(uuid())
+  callId          String        @unique @map("call_id")
+  callerNumber    String?       @map("caller_number")
+  recipientNumber String?       @map("recipient_number")
+  direction       CallDirection @default(INBOUND)
+  status          CallStatus    @default(RINGING)
+  durationSeconds Int           @default(0) @map("duration_seconds")
+  ivrSelection    String?       @map("ivr_selection")
+  createdAt       DateTime      @default(now()) @map("created_at")
+
+  @@map("call_logs")
+}
