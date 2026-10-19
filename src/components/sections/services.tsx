@@ -9,7 +9,6 @@ import {
 	Gauge,
 	Layout,
 	ShieldCheck,
-	Sparkles,
 	Terminal,
 	TrendingUp,
 	Zap,
@@ -68,21 +67,21 @@ export function ServicesSection() {
 							<Card className="h-full group relative border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-cyan-500/40 transition-all duration-300 shadow-sm hover:shadow-cyan-500/10 flex flex-col justify-between overflow-hidden">
 								<CardHeader className="p-6 sm:p-8 pb-4">
 									<div className="flex items-center justify-between gap-4 mb-4">
-										<div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 text-cyan-400 group-hover:scale-105 group-hover:border-cyan-400 transition-all shadow-sm shadow-cyan-500/20">
-											<Bot className="size-6" />
+										<div className="flex size-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-foreground group-hover:border-white/20 transition-all">
+											<Bot className="size-5 text-cyan-400" />
 										</div>
 										<div className="flex items-center gap-2">
 											<Badge
 												variant="secondary"
-												className="border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs font-medium"
+												className="border border-white/10 bg-white/[0.03] text-neutral-300 text-xs font-mono font-medium"
 											>
 												{aiService.badge}
 											</Badge>
 											<Badge
 												variant="outline"
-												className="border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs flex items-center gap-1 font-mono"
+												className="border-white/10 bg-white/[0.02] text-neutral-400 text-xs flex items-center gap-1 font-mono"
 											>
-												<Sparkles className="size-3" />
+												<Cpu className="size-3" />
 												{t("bentoAiBadge")}
 											</Badge>
 										</div>
@@ -104,7 +103,7 @@ export function ServicesSection() {
 												{t("bentoAiLiveConsole")}
 											</span>
 											<span className="flex items-center gap-1 text-[10px] text-emerald-400">
-												<span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+												<span className="size-1.5 rounded-full bg-emerald-400" />
 												LIVE RUNTIME
 											</span>
 										</div>

@@ -103,7 +103,7 @@ export function AdminDashboardView({
 					</div>
 					<h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground flex items-center gap-2.5">
 						<span>Executive Operations Hub</span>
-						<span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+						<span className="size-2 rounded-full bg-emerald-400" />
 					</h1>
 					<p className="text-xs sm:text-sm text-muted-foreground">
 						Live client inquiries, telemetry event streams, and Drizzle SQLite

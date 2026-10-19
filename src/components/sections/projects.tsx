@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { ProjectDialog } from "@/components/sections/project-dialog";
@@ -102,9 +102,8 @@ export function ProjectsSection() {
 										{project.featured && (
 											<Badge
 												variant="outline"
-												className="border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs flex items-center gap-1"
+												className="border-white/10 bg-white/[0.03] text-neutral-300 text-xs font-mono"
 											>
-												<Sparkles className="size-3" />
 												Featured
 											</Badge>
 										)}

@@ -38,17 +38,14 @@ export function HeroSection() {
 			<div className="absolute top-0 left-1/2 -translate-x-1/2 size-[600px] md:size-[800px] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(120,119,198,0.12),rgba(255,255,255,0))] pointer-events-none -z-10" />
 
 			<div className="container mx-auto max-w-6xl px-4 sm:px-6 flex flex-col items-center text-center">
-				{/* Status Pill Badge with Minimalist Pulsing Indicator */}
+				{/* Status Pill Badge with Minimalist Indicator */}
 				<motion.div
 					initial={{ opacity: 0, y: -10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.4 }}
-					className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md text-neutral-300 text-xs font-mono mb-8 hover:border-white/20 transition-all"
+					className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.02] text-neutral-300 text-xs font-mono mb-8 hover:border-white/20 transition-colors"
 				>
-					<span className="relative flex size-2">
-						<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-						<span className="relative inline-flex rounded-full size-2 bg-emerald-400" />
-					</span>
+					<span className="size-1.5 rounded-full bg-emerald-400" />
 					<span>{t("heroStatus")}</span>
 				</motion.div>
 

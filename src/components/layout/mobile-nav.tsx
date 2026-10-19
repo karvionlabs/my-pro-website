@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Globe, Menu, Sparkles } from "lucide-react";
+import { ArrowRight, Globe, Menu, Terminal } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -48,10 +48,10 @@ export function MobileNav() {
 					<SheetHeader className="p-0 text-left mb-6">
 						<SheetTitle className="flex items-center justify-between text-lg font-bold">
 							<div className="flex items-center gap-2">
-								<span className="flex size-8 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-									<Sparkles className="size-4" />
+								<span className="flex size-7 items-center justify-center rounded-lg bg-white/[0.04] text-foreground border border-white/10">
+									<Terminal className="size-3.5 text-cyan-400" />
 								</span>
-								<span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
+								<span className="text-foreground font-heading">
 									{BRAND_DATA.name}
 								</span>
 							</div>
@@ -94,7 +94,7 @@ export function MobileNav() {
 						onClick={() => setOpen(false)}
 						className={buttonVariants({
 							className:
-								"w-full bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-medium shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2",
+								"w-full bg-foreground text-background hover:bg-neutral-200 font-medium text-sm flex items-center justify-center gap-2 rounded-lg transition-colors",
 						})}
 					>
 						<span>{t("startProject")}</span>

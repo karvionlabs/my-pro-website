@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Mail, Sparkles } from "lucide-react";
+import { ArrowUpRight, Mail, Terminal } from "lucide-react";
 import Link from "next/link";
 import { NAV_ITEMS } from "@/components/layout/header";
 import {
@@ -22,8 +22,8 @@ export function Footer() {
 					{/* Brand Column */}
 					<div className="md:col-span-2 space-y-4">
 						<Link href="/" className="flex items-center gap-2.5 group">
-							<div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 group-hover:border-cyan-400 transition-colors shadow-sm shadow-cyan-500/20">
-								<Sparkles className="size-4 text-cyan-400" />
+							<div className="flex size-8 items-center justify-center rounded-lg border border-white/15 bg-white/[0.04] text-foreground group-hover:border-white/30 transition-colors">
+								<Terminal className="size-4 text-cyan-400" />
 							</div>
 							<span className="font-heading text-lg font-bold tracking-tight text-foreground">
 								{BRAND_DATA.name}

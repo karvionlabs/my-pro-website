@@ -21,8 +21,6 @@
 		"@hookform/resolvers": "^5.9.2",
 		"@libsql/client": "^0.18.0",
 		"@number-flow/react": "^0.6.2",
-		"@types/canvas-confetti": "^1.9.0",
-		"canvas-confetti": "^1.9.4",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"cmdk": "^1.1.1",
