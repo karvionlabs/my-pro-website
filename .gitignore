@@ -12,3 +12,7 @@ package-lock.json
 *.db-wal
 sqlite.db
 *.tsbuildinfo
+.claude/
+.cursor/
+.devin/
+.github/workflows/

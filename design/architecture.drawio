@@ -1,0 +1,96 @@
+<mxfile host="app.diagrams.net" modified="2026-10-19T13:52:00.000Z" agent="Mozilla/5.0" version="24.0.0" type="device">
+  <diagram id="karvion-system-architecture" name="Karvion Labs Enterprise Architecture">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Tier 1: Client Layer -->
+        <mxCell id="tier1_bg" value="Client Layer (Browser &amp; Devices)" style="swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#f8fafc;strokeColor=#cbd5e1;fontStyle=1;fontSize=14;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1080" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="client_web" value="Next.js 16 Client Portal&#xa;(React 19, Tailwind v4, Lucide)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0f172a;strokeColor=#334155;fontColor=#f8fafc;fontStyle=1;" vertex="1" parent="tier1_bg">
+          <mxGeometry x="40" y="45" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="client_pwa" value="FCM Service Worker&#xa;(Background Push Notifications)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;" vertex="1" parent="tier1_bg">
+          <mxGeometry x="310" y="45" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="client_admin" value="Admin Command Console&#xa;(Telemetry, Biome &amp; Audit Logs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;" vertex="1" parent="tier1_bg">
+          <mxGeometry x="580" y="45" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="client_sip" value="WebRTC / SIP Client&#xa;(Asterisk IVR Audio Stream)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#475569;fontColor=#f8fafc;" vertex="1" parent="tier1_bg">
+          <mxGeometry x="840" y="45" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 2: Gateway & Application Layer -->
+        <mxCell id="tier2_bg" value="Application &amp; Security Layer (Next.js 16 App Router &amp; DevSecOps)" style="swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#f1f5f9;strokeColor=#94a3b8;fontStyle=1;fontSize=14;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="40" y="210" width="1080" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="app_auth" value="Authentication &amp; RBAC&#xa;(@supabase/ssr + jose JWT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0284c7;strokeColor=#0369a1;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier2_bg">
+          <mxGeometry x="40" y="50" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_api" value="Type-Safe API &amp; Actions&#xa;(next-safe-action + Zod)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0284c7;strokeColor=#0369a1;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier2_bg">
+          <mxGeometry x="290" y="50" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_inngest" value="Background Automation Engine&#xa;(Inngest Serverless Workflows)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0284c7;strokeColor=#0369a1;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier2_bg">
+          <mxGeometry x="550" y="50" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_voip_webhook" value="VoIP Telephony Webhook&#xa;(/api/voip Call Event Ingestion)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0284c7;strokeColor=#0369a1;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier2_bg">
+          <mxGeometry x="820" y="50" width="220" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 3: Database & Persistence Layer -->
+        <mxCell id="tier3_bg" value="Persistence &amp; Storage Layer (Open-Source Dual Engine)" style="swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#f8fafc;strokeColor=#cbd5e1;fontStyle=1;fontSize=14;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="1080" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="db_pg" value="PostgreSQL / Supabase&#xa;(Prisma ORM Enterprise Models)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#10b981;strokeColor=#059669;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier3_bg">
+          <mxGeometry x="60" y="45" width="200" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="db_sqlite" value="Local SQLite Engine&#xa;(Drizzle ORM High-Speed Cache)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#059669;strokeColor=#047857;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier3_bg">
+          <mxGeometry x="320" y="45" width="200" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="db_fcm" value="Firebase Cloud Messaging&#xa;(Hybrid Push Infrastructure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f59e0b;strokeColor=#d97706;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier3_bg">
+          <mxGeometry x="580" y="55" width="210" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="db_telemetry" value="Pino Structured Audit Engine&#xa;(Credential Redaction &amp; Logs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#475569;strokeColor=#334155;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier3_bg">
+          <mxGeometry x="830" y="55" width="210" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 4: Native Linux Media & Automation Services -->
+        <mxCell id="tier4_bg" value="Open-Source Media &amp; Telephony Subsystems (Linux Environment)" style="swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#f1f5f9;strokeColor=#94a3b8;fontStyle=1;fontSize=14;fontColor=#0f172a;" vertex="1" parent="1">
+          <mxGeometry x="40" y="590" width="1080" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="media_ffmpeg" value="Native FFmpeg Pipeline&#xa;(/usr/bin/ffmpeg Transcoding)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6366f1;strokeColor=#4f46e5;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier4_bg">
+          <mxGeometry x="60" y="50" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="media_cut" value="LosslessCut &amp; Kdenlive&#xa;(Offline Course Asset Preparation)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4f46e5;strokeColor=#4338ca;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier4_bg">
+          <mxGeometry x="340" y="50" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="voip_asterisk" value="Asterisk VoIP PBX Engine&#xa;(SIP.conf &amp; Extensions.conf Dialplan)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7c3aed;strokeColor=#6d28d9;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier4_bg">
+          <mxGeometry x="620" y="50" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="devops_strix" value="DevSecOps &amp; Strix Skills&#xa;(Automated OWASP Audit &amp; Biome)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dc2626;strokeColor=#b91c1c;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="tier4_bg">
+          <mxGeometry x="900" y="50" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Inter-tier Connections -->
+        <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0284c7;" edge="1" parent="1" source="client_web" target="app_auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0284c7;" edge="1" parent="1" source="client_pwa" target="db_fcm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#059669;" edge="1" parent="1" source="app_api" target="db_pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#7c3aed;" edge="1" parent="1" source="client_sip" target="app_voip_webhook">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#7c3aed;" edge="1" parent="1" source="app_voip_webhook" target="voip_asterisk">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

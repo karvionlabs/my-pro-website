@@ -1,0 +1,14 @@
+services:
+  asterisk:
+    image: andrius/asterisk:latest
+    container_name: karvion-asterisk-pbx
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - ./asterisk/sip.conf:/etc/asterisk/sip.conf:ro
+      - ./asterisk/extensions.conf:/etc/asterisk/extensions.conf:ro
+    environment:
+      - ASTERISK_UID=1000
+      - ASTERISK_GID=1000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

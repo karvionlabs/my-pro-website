@@ -1,0 +1,174 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"project": "Karvion Labs",
+	"version": "1.0.0",
+	"designSystem": {
+		"framework": "Tailwind CSS v4 + Shadcn UI Primitives",
+		"theme": "Dark Modern Minimalist (Linear / Vercel style)",
+		"colorTokens": {
+			"background": "#05070a",
+			"surface": "rgba(255, 255, 255, 0.02)",
+			"surfaceBorder": "rgba(255, 255, 255, 0.08)",
+			"surfaceHover": "rgba(255, 255, 255, 0.05)",
+			"primary": "#38bdf8",
+			"primaryAccent": "#818cf8",
+			"textPrimary": "#f8fafc",
+			"textSecondary": "#94a3b8",
+			"textMuted": "#64748b",
+			"accentGreen": "#10b981",
+			"accentRed": "#ef4444"
+		},
+		"typography": {
+			"fontFamilySans": "Plus Jakarta Sans, sans-serif",
+			"fontFamilyBengali": "Hind Siliguri, sans-serif",
+			"fontFamilyMono": "JetBrains Mono, monospace"
+		}
+	},
+	"layouts": [
+		{
+			"id": "landing-portal",
+			"title": "Public Landing Portal",
+			"route": "/",
+			"viewport": {
+				"width": 1440,
+				"grid": "12-column dynamic",
+				"containerMaxWidth": 1280
+			},
+			"sections": [
+				{
+					"id": "global-navbar",
+					"component": "Navbar",
+					"position": "fixed-top",
+					"height": 64,
+					"border": "1px solid rgba(255,255,255,0.08)",
+					"backdropBlur": "12px",
+					"elements": [
+						{ "type": "logo", "text": "Karvion Labs", "alignment": "left" },
+						{
+							"type": "nav-links",
+							"items": [
+								"Features",
+								"Solutions",
+								"Architecture",
+								"Education",
+								"Tutoring",
+								"Pricing"
+							]
+						},
+						{
+							"type": "action-group",
+							"items": [
+								{ "type": "language-toggle", "options": ["EN", "বাংলা"] },
+								{ "type": "command-trigger", "shortcut": "Ctrl+K" },
+								{
+									"type": "cta-button",
+									"label": "Start Consultation",
+									"variant": "glow"
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "hero-section",
+					"component": "HeroBento",
+					"layout": "centered-headline-with-spotlight",
+					"elements": [
+						{
+							"type": "badge",
+							"text": "Open-Source AI & Enterprise Automation 2026",
+							"style": "pill-monochrome-border"
+						},
+						{
+							"type": "heading-h1",
+							"text": "Architecting Enterprise AI Without Proprietary Vendor Lock-in",
+							"typography": "text-5xl md:text-7xl font-bold tracking-tight"
+						},
+						{
+							"type": "subtitle",
+							"text": "Empowering businesses, developers, and learners with self-hosted AI models, automated VoIP telephony, and modular platforms.",
+							"typography": "text-lg md:text-xl text-slate-400 max-w-2xl"
+						},
+						{
+							"type": "interactive-demo-widget",
+							"component": "WorkflowCanvasPreview",
+							"width": "100%",
+							"height": 420
+						}
+					]
+				},
+				{
+					"id": "bento-features",
+					"component": "BentoGrid",
+					"columns": 3,
+					"gap": 16,
+					"cards": [
+						{
+							"id": "card-auth-sso",
+							"title": "Unified SSO & RBAC",
+							"colSpan": 1,
+							"tech": "Supabase + Jose Edge JWT",
+							"description": "Multi-tenant authentication with instant session verification."
+						},
+						{
+							"id": "card-db-engine",
+							"title": "Dual-Engine Persistence",
+							"colSpan": 2,
+							"tech": "PostgreSQL (Prisma) + SQLite (Drizzle)",
+							"description": "Hybrid zero-latency local caching paired with cloud sync."
+						},
+						{
+							"id": "card-push-notifications",
+							"title": "Hybrid Cloud Messaging",
+							"colSpan": 2,
+							"tech": "Firebase Cloud Messaging + Service Worker",
+							"description": "Cross-device web push notifications with zero third-party recurring cost."
+						},
+						{
+							"id": "card-voip-telephony",
+							"title": "Asterisk IVR & VoIP",
+							"colSpan": 1,
+							"tech": "Open-Source Asterisk PBX + Webhooks",
+							"description": "Automated voice call routing, IVR menus, and call recording."
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "admin-telemetry-console",
+			"title": "Admin Operations & Telemetry Console",
+			"route": "/admin",
+			"viewport": {
+				"width": 1440,
+				"grid": "Sidebar + Main Dashboard"
+			},
+			"sections": [
+				{
+					"id": "admin-sidebar",
+					"width": 260,
+					"links": [
+						{ "label": "Overview & Health", "icon": "Activity" },
+						{ "label": "User Profiles", "icon": "Users" },
+						{ "label": "Leads & CRM", "icon": "Inbox" },
+						{ "label": "VoIP Call Center", "icon": "PhoneCall" },
+						{ "label": "Security Audits", "icon": "ShieldCheck" },
+						{ "label": "System Logs", "icon": "Terminal" }
+					]
+				},
+				{
+					"id": "admin-metrics-grid",
+					"widgets": [
+						{ "name": "Active Node Workers", "value": "11 Turbopack Workers" },
+						{ "name": "Average Response Latency", "value": "42ms" },
+						{
+							"name": "Database Connection Pool",
+							"value": "Prisma + LibSQL Alive"
+						},
+						{ "name": "DevSecOps Status", "value": "0 OWASP Vulnerabilities" }
+					]
+				}
+			]
+		}
+	]
+}
