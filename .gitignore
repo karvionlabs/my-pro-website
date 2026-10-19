@@ -11,3 +11,4 @@ package-lock.json
 *.db-shm
 *.db-wal
 sqlite.db
+*.tsbuildinfo
