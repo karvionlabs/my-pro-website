@@ -32,3 +32,24 @@
 ## 6. Anti-"AI Vibe" & High-Craft Product Design Standards
 - **No Generic AI Gradients:** Never use cheap neon rainbow gradients, generic AI mesh blobs, or muddy pastel cards. Use Linear/Vercel-style subtle `1px` borders (`border-white/10`), high-contrast typography, monochrome surfaces with crisp single-color accents, and Bento Grid layouts.
 - **Real Data & Micro-Interactions:** Use `@number-flow/react` for metric numbers, `zustand` for complex client states, `nuqs` for URL states, and `drizzle-orm` for real data persistence.
+
+## 7. Master Integration Rulebook & Open-Source Protocol (System Integrity)
+- **Supervisory Mandate:** Enforce strict discipline, modular precision, and zero-tolerance for rushed, half-baked implementations or unverified dependencies.
+- **Phase 1 (Foundation & Authentication Layer):**
+  - Allowed Tools: Node.js, Next.js / Python (Flask/FastAPI), PostgreSQL / SQLite / MongoDB, JWT (`jose`), OAuth 2.0.
+  - Rule: Build a secure Single Sign-On (SSO) and Unified Profile backend before touching any frontend UI components. Zero insecure endpoints.
+- **Phase 2 (Core Module & Workflow Integration):**
+  - Allowed Tools: Git & GitHub, Open-source REST API frameworks, Drizzle ORM.
+  - Rule: Strict modular architecture for each subsystem (Education, Tutoring system, Job portal). Monolithic or tightly coupled spaghetti code is prohibited.
+- **Phase 3 (Media & Content Processing):**
+  - Allowed Tools: Kdenlive, LosslessCut, FFmpeg (Linux/Ubuntu environment).
+  - Rule: All course materials, video pipelines, and asset optimizations must strictly utilize open-source media utilities. Zero paid or proprietary services.
+- **Phase 4 (AI Automation & Agentic Workflows):**
+  - Allowed Tools: Google Antigravity CLI (`agy`), Open-source LLM integrations, structured JSON schemas.
+  - Rule: All automation scripts and sub-agent routers must be cleanly documented and tested locally before deployment.
+- **Anti-Chaos Directives:**
+  - Zero Over-Engineering: Only introduce packages aligned with the active lifecycle phase.
+  - Zero Premature Deployment: Never declare a component or service complete without verifiable modular testing and review.
+  - Zero Stack Shifting: Maintain strict consistency with the defined open-source stack.
+  - Zero False Completion: Never mask missing environment or CLI configurations with mock placeholders.
+
