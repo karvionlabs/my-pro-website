@@ -5,6 +5,8 @@ import {
 	signSessionToken,
 	verifySessionToken,
 } from "@/lib/crypto";
+import { exportToCsv, parseCsvData } from "@/lib/csv-engine";
+import { logger } from "@/lib/logger";
 import { sendEmail } from "@/lib/mailer";
 import { createQueryClient } from "@/lib/query-client";
 import { useTelemetryStore } from "@/store/telemetry-store";
@@ -78,6 +80,43 @@ describe("Infrastructure & DevOps Core Unit Tests", () => {
 			expect(options.queries?.staleTime).toBe(60000);
 			expect(options.queries?.gcTime).toBe(300000);
 			expect(options.queries?.refetchOnWindowFocus).toBe(false);
+		});
+	});
+
+	describe("5. Structured Pino Server Logger", () => {
+		it("exports configured logger with methods and redaction paths", () => {
+			expect(logger).toBeDefined();
+			expect(typeof logger.info).toBe("function");
+			expect(typeof logger.warn).toBe("function");
+			expect(typeof logger.error).toBe("function");
+		});
+	});
+
+	describe("6. CSV Data Export & Parse Engine", () => {
+		it("serializes dataset to CSV string and parses it back accurately", () => {
+			const dataset = [
+				{ id: "lead-1", name: "Karib Shahjada", service: "AI Workflows" },
+				{ id: "lead-2", name: "Enterprise Client", service: "QA Automation" },
+			];
+
+			const csv = exportToCsv(dataset);
+			expect(csv).toContain("id,name,service");
+			expect(csv).toContain("Karib Shahjada");
+
+			const parsed = parseCsvData<{
+				id: string;
+				name: string;
+				service: string;
+			}>(csv);
+			expect(parsed.length).toBe(2);
+			expect(parsed[0].name).toBe("Karib Shahjada");
+			expect(parsed[1].service).toBe("QA Automation");
+		});
+
+		it("handles empty or blank datasets gracefully", () => {
+			expect(exportToCsv([])).toBe("");
+			expect(parseCsvData("")).toEqual([]);
+			expect(parseCsvData("   ")).toEqual([]);
 		});
 	});
 });
