@@ -83,7 +83,7 @@
 		"eslint-config-next": "16.4.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^17.6.0",
-		"prisma": "^6.19.3",
+		"prisma": "^7.10.1",
 		"tailwindcss": "^4",
 		"typescript": "^5",
 		"vitest": "^5.0.5"
