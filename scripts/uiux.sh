@@ -6,17 +6,31 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Resolve symlinks to locate real script directory
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-SEARCH_PY="${PROJECT_ROOT}/.agent/skills/ui-ux-pro-max/scripts/search.py"
 
-if [ ! -f "${SEARCH_PY}" ]; then
-  # Fallback to .agents if located there
-  SEARCH_PY="${PROJECT_ROOT}/.agents/skills/ui-ux-pro-max/scripts/search.py"
-fi
+# Search engine discovery
+SEARCH_PY=""
+for candidate in \
+  "${PROJECT_ROOT}/.agent/skills/ui-ux-pro-max/scripts/search.py" \
+  "${PROJECT_ROOT}/.agents/skills/ui-ux-pro-max/scripts/search.py" \
+  "/home/assdi/setup/.agent/skills/ui-ux-pro-max/scripts/search.py" \
+  "/home/assdi/setup/.agents/skills/ui-ux-pro-max/scripts/search.py"; do
+  if [ -f "${candidate}" ]; then
+    SEARCH_PY="${candidate}"
+    break
+  fi
+done
 
-if [ ! -f "${SEARCH_PY}" ]; then
-  echo "❌ Error: UI/UX Pro Max search engine not found at ${SEARCH_PY}" >&2
+if [ -z "${SEARCH_PY}" ]; then
+  echo "❌ Error: UI/UX Pro Max search engine not found." >&2
   exit 1
 fi
 
