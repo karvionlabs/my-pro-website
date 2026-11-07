@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { Hind_Siliguri, Plus_Jakarta_Sans } from "next/font/google";
+import {
+	Hind_Siliguri,
+	JetBrains_Mono,
+	Plus_Jakarta_Sans,
+} from "next/font/google";
 import { CommandMenu } from "@/components/layout/command-menu";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
@@ -11,6 +15,12 @@ import "./globals.css";
 
 const fontSans = Plus_Jakarta_Sans({
 	variable: "--font-sans",
+	subsets: ["latin"],
+	display: "swap",
+});
+
+const fontMono = JetBrains_Mono({
+	variable: "--font-mono",
 	subsets: ["latin"],
 	display: "swap",
 });
@@ -116,7 +126,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`dark ${fontSans.variable} ${fontBangla.variable} scroll-smooth antialiased`}
+			className={`dark ${fontSans.variable} ${fontMono.variable} ${fontBangla.variable} scroll-smooth antialiased`}
 			suppressHydrationWarning
 		>
 			<head>

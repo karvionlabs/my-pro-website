@@ -28,3 +28,8 @@
 - **No Generic AI Gradients:** Never use cheap neon rainbow gradients, generic AI mesh blobs, or muddy pastel cards. Use Linear/Vercel-style subtle `1px` borders (`border-white/10`), high-contrast typography, monochrome surfaces with crisp single-color accents, and Bento Grid layouts.
 - **Real Data & Micro-Interactions:** Use `@number-flow/react` for metric numbers, `zustand` for complex client states, `nuqs` for URL states, and `drizzle-orm` for real data persistence.
 
+## 7. UI/UX Pro Max Design System & Token Hierarchy
+- **Master & Overrides Pattern:** Before designing or modifying any user interface, inspect `design-system/karvion-labs/MASTER.md` and page-specific overrides in `design-system/karvion-labs/pages/[page].md`.
+- **UI/UX Intelligence Engine:** Leverage the integrated UI/UX Pro Max search engine via `npm run uiux` or `./scripts/uiux.sh` to consult the 79 styles, 192 product palettes, and 119 UX/WCAG rules.
+- **Micro-Interactions & Accessibility:** All interactive elements must have `cursor-pointer`, visible focus rings (`focus-visible:ring-2`), 4.5:1 minimum contrast, and zero layout shift. No emojis as icons (use Lucide SVG icons).
+

@@ -53,3 +53,8 @@
   - Zero Stack Shifting: Maintain strict consistency with the defined open-source stack.
   - Zero False Completion: Never mask missing environment or CLI configurations with mock placeholders.
 
+## 8. UI/UX Pro Max Design System & Master Token Alignment
+- **Hierarchical Token System:** Strict adherence to `design-system/karvion-labs/MASTER.md` as the global design source of truth. Page-specific files in `design-system/karvion-labs/pages/` override Master rules.
+- **Design Intelligence Queries:** Use `npm run uiux` or `./scripts/uiux.sh` to consult the 79 style categories, 192 product palettes, and 119 UX guidelines before introducing new visual patterns.
+- **Accessibility & Craft Checklist:** Enforce WCAG 2.2 AA (4.5:1 minimum contrast), visible focus indicators (`focus-visible:ring-2`), no layout-shifting hovers, and strict avoidance of emojis as icons.
+

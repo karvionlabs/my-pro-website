@@ -10,6 +10,11 @@
 		"format": "biome format --write .",
 		"check": "biome check --write .",
 		"test": "vitest run",
+		"uiux": "./scripts/uiux.sh",
+		"uiux:ds": "./scripts/uiux.sh ds",
+		"uiux:style": "./scripts/uiux.sh style",
+		"uiux:ux": "./scripts/uiux.sh ux",
+		"uiux:stack": "./scripts/uiux.sh stack",
 		"prepare": "husky",
 		"postinstall": "prisma skills sync || exit 0"
 	},

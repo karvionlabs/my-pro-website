@@ -6,7 +6,15 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"ignoreUnknown": false
+		"ignoreUnknown": false,
+		"includes": [
+			"src/**",
+			"scripts/**",
+			"package.json",
+			"next.config.ts",
+			"biome.json",
+			"tsconfig.json"
+		]
 	},
 	"formatter": {
 		"enabled": true,
